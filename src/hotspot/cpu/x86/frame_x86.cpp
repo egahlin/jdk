@@ -253,7 +253,11 @@ bool frame::safe_for_sender(JavaThread *thread) {
 
   // Will the pc we fetch be non-zero (which we'll find at the oldest frame)
 
-  if ((address) this->fp()[return_addr_offset] == NULL) return false;
+  // Will the pc we fetch be non-zero (which we'll find at the oldest frame) and readable
+
+  if (!thread->is_in_usable_stack((address)this->fp())) {
+    return false;
+  }
 
 
   // could try and do some more potential verification of native frame if we could think of some...
