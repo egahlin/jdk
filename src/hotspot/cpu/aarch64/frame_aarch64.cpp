@@ -42,6 +42,7 @@
 #include "runtime/stubCodeGenerator.hpp"
 #include "runtime/stubRoutines.hpp"
 #include "vmreg_aarch64.inline.hpp"
+#include "runtime/os.hpp"
 #ifdef COMPILER1
 #include "c1/c1_Runtime1.hpp"
 #include "runtime/vframeArray.hpp"
@@ -262,9 +263,13 @@ bool frame::safe_for_sender(JavaThread *thread) {
     return false;
   }
 
-  // Will the pc we fetch be non-zero (which we'll find at the oldest frame)
+  // Will the pc we fetch be non-zero (which we'll find at the oldest frame) and readable
 
-  if ( (address) this->fp()[return_addr_offset] == NULL) return false;
+  if (!os::is_readable_pointer(this->fp() + return_addr_offset * sizeof(address))) {
+    return false;
+  }
+
+  if ((address) this->fp()[return_addr_offset] == NULL) return false;
 
 
   // could try and do some more potential verification of native frame if we could think of some...
