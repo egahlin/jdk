@@ -60,7 +60,7 @@ class JvmtiTagMapKey : public CHeapObj<mtInternal> {
     return entry._obj->identity_hash();
   }
 
-  static bool equals(JvmtiTagMapKey const & lhs, JvmtiTagMapKey const & rhs) {
+  static bool equals(JvmtiTagMapKey const& lhs, JvmtiTagMapKey const& rhs) {
     oop lhs_obj = lhs._obj != nullptr ? lhs._obj : lhs.object_no_keepalive();
     oop rhs_obj = rhs._obj != nullptr ? rhs._obj : rhs.object_no_keepalive();
     return lhs_obj == rhs_obj;
