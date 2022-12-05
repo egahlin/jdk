@@ -39,7 +39,7 @@
 #include "utilities/macros.hpp"
 #include "gc/shared/oopStorage.hpp"
 
-JvmtiTagMapKey::JvmtiTagMapKey(oop obj): _obj(obj){}
+JvmtiTagMapKey::JvmtiTagMapKey(oop obj): _obj(obj) {}
 
 JvmtiTagMapKey::JvmtiTagMapKey(const JvmtiTagMapKey& src) {
    // move object into WeakHandle when copying into the table
