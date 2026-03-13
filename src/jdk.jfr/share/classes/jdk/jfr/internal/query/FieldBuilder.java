@@ -274,7 +274,7 @@ final class FieldBuilder {
         case "int", "long", "short", "byte":
             field.integralType = true;
             field.alignLeft = false;
-            field.identifier = fieldName.endsWith("Id") || field.label.endsWith(" Identifier");
+            field.identifier = fieldName.endsWith("Id") || field.label.endsWith("Identifier");
             break;
         case "float", "double":
             field.fractionalType = true;
